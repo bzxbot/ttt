@@ -4,6 +4,9 @@
  */
 package info.botelho.ttt;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Bernardo
@@ -15,7 +18,13 @@ public class RobotAgent {
     public static GameInput getInput(GameState gameState) {
         BoardTreeNode boardTreeNode = new BoardTreeNode(-1, -1, null, gameState.getBoard());
         MinimaxResult result = minimax(gameState.getCurrentPlayer().getSymbol(), gameState.getCurrentPlayer().getSymbol(), boardTreeNode);
-        return new GameInput(result.row, result.col);
+        GameInput gameInput = new GameInput();
+        try {
+            gameInput.setInput(result.row, result.col);
+        } catch (InvalidGameInputException ex) {
+            Logger.getLogger(RobotAgent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return gameInput;
     }
 
     private static MinimaxResult minimax(char playerSymbol, char currentSymbol, BoardTreeNode boardTreeNode) {

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package info.botelho.ttt;
 
 import java.util.Scanner;
@@ -21,14 +17,24 @@ public class HumanConsoleClient extends GameClient {
     
     public GameInput getInput(GameState gameState) {
         System.out.println("Enter row and column: ");
-        return new GameInput(readNextInt() - 1, readNextInt() - 1);
+        GameInput gameInput = new GameInput();
+        boolean validInput = false;
+        while (!validInput) {
+            try {
+                gameInput.setInput(readNextInt() - 1, readNextInt() - 1);
+                validInput = true;
+            } catch (InvalidGameInputException invalidGameInputException) {
+                System.out.println(invalidGameInputException.getMessage());
+            }
+        }
+        return gameInput;
     }
     
     private int readNextInt() {
         while (scanner.hasNext()) {
             if (scanner.hasNextInt()) {
 		return scanner.nextInt();
-                } else {
+            } else {
 		scanner.next();
             }
 	}

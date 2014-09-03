@@ -27,8 +27,4 @@ public class Player {
     public void setNextPlayer(Player nextPlayer) {
         this.nextPlayer = nextPlayer;
     }
-    
-    public GameClient getGameClient() {
-        return null;
-    }
 }
