@@ -9,14 +9,14 @@ package info.botelho.ttt;
  * @author Bernardo
  */
 public class Player {
-    private char symbol;
+    private GameSymbol symbol;
     private Player nextPlayer;  
     
-    public Player(char symbol) {
+    public Player(GameSymbol symbol) {
         this.symbol = symbol;
     }
     
-    public char getSymbol() {
+    public GameSymbol getSymbol() {
         return symbol;
     }
     

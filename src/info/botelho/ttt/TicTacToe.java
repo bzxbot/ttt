@@ -47,7 +47,7 @@ public class TicTacToe {
             gameInput = currentClient.getInput(gameState);
         } while (!isInputValid(gameInput));
         
-        gameState.getBoard().setSymbolAt(gameInput.getRow(), gameInput.getColumn(), currentClient.getPlayer().getSymbol());
+        gameState.getBoard().setSymbolAt(gameInput.getRow(), gameInput.getColumn(), currentClient.getPlayer());
     }
     
     private void nextPlayer() {
@@ -57,7 +57,7 @@ public class TicTacToe {
     }
     
     private boolean isInputValid(GameInput gameInput) {
-        return gameState.getBoard().getSymbolAtPosition(gameInput.getRow(), gameInput.getColumn()) == Board.EmptyCell;
+        return gameState.getBoard().getSymbolAtPosition(gameInput.getRow(), gameInput.getColumn()) == null;
     }
     
     private Result isGameOver() {

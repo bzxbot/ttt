@@ -15,7 +15,7 @@ public class DrawRule extends Rule {
     public Result check(GameState gameState) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (gameState.getBoard().getSymbolAtPosition(i, j) == Board.EmptyCell) {
+                if (gameState.getBoard().getSymbolAtPosition(i, j) == null) {
                     return null;
                 }
             }

@@ -9,7 +9,6 @@ package info.botelho.ttt;
  * @author Bernardo
  */
 public class MinimaxResult {
-    
     public int score;
     public int row;
     public int col;

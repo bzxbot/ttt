@@ -13,7 +13,7 @@ public class GameOverRule extends Rule {
     public Result check(GameState gameState) {
         Board board = gameState.getBoard();
         
-        char lastPlayerSymbol = gameState.getCurrentPlayer().getSymbol();
+        GameSymbol lastPlayerSymbol = gameState.getCurrentPlayer().getSymbol();
         
         for (int i = 0; i < 3; i++) {
             if (board.getSymbolAtPosition(i, 0) == lastPlayerSymbol &&

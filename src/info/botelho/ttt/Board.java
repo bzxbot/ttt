@@ -1,40 +1,32 @@
 package info.botelho.ttt;
 
-public class Board {
+public class Board {    
     
-    public static char EmptyCell = ' ';
+    private BoardSpace[][] boardSpaces;
     
-    public char[][] board;
+    public Board(BoardSpace[][] boardSpaces) {
+        this.boardSpaces = boardSpaces;
+    }
     
     public Board() {
-        this.board = new char[3][3];
+        this.boardSpaces = new BoardSpace[3][3];
         
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
-                this.board[i][j] = ' ';
+                this.boardSpaces[i][j] = null;
             }
         }
     }
     
-    public Board(char[][] board) {
-        this.board = new char[3][3];
-        
-        for(int i = 0; i < 3; i++) {
-            for(int j = 0; j < 3; j++) {
-                this.board[i][j] = board[i][j];
-            }
-        }
+    public BoardSpace[][] getBoardSpaces() {
+        return this.boardSpaces;
     }
     
     public void setSymbolAt(int row, int col, Player player) {
-        this.board[row][col] = player.getSymbol();
+        this.boardSpaces[row][col].setSymbol(player.getSymbol());
     }
     
-    public void setSymbolAt(int row, int col, char symbol) {
-        this.board[row][col] = symbol;
-    }
-    
-    public char getSymbolAtPosition(int row, int col) {
-        return board[row][col];
+    public GameSymbol getSymbolAtPosition(int row, int col) {
+        return boardSpaces[row][col].getSymbol();
     }
 }

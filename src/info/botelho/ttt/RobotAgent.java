@@ -17,7 +17,7 @@ public class RobotAgent {
     
     public static GameInput getInput(GameState gameState) {
         BoardTreeNode boardTreeNode = new BoardTreeNode(-1, -1, null, gameState.getBoard());
-        MinimaxResult result = minimax(gameState.getCurrentPlayer().getSymbol(), gameState.getCurrentPlayer().getSymbol(), boardTreeNode);
+        MinimaxResult result = minimax(gameState.getCurrentPlayer(), gameState.getCurrentPlayer(), gameState.getCurrentPlayer().getNextPlayer(), boardTreeNode);
         GameInput gameInput = new GameInput();
         try {
             gameInput.setInput(result.row, result.col);
@@ -27,28 +27,22 @@ public class RobotAgent {
         return gameInput;
     }
 
-    private static MinimaxResult minimax(char playerSymbol, char currentSymbol, BoardTreeNode boardTreeNode) {
-        int bestScore;
-        int bestRow = -1, bestCol = -1;
+    private static MinimaxResult minimax(Player current, Player max, Player min, BoardTreeNode boardTreeNode) {
+        int score;
+        int row = -1, col = -1;
         char nextSymbol;
 
-        if (currentSymbol == playerSymbol) {
-            bestScore = Integer.MIN_VALUE;
+        if (current == max) {
+            score = Integer.MAX_VALUE;
         } else {
-            bestScore = Integer.MAX_VALUE;
+            score = Integer.MIN_VALUE;
         }
         
-        if (currentSymbol == 'X') {
-            nextSymbol = 'O';
-        } else {
-            nextSymbol = 'X';
-        }
-
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (boardTreeNode.board.getSymbolAtPosition(i, j) == Board.EmptyCell) {
-                    Board newBoard = new Board(boardTreeNode.board.board);
-                    newBoard.setSymbolAt(i, j, currentSymbol);
+                if (boardTreeNode.board.getSymbolAtPosition(i, j) == null) {
+                    Board newBoard = new Board(boardTreeNode.board.getBoardSpaces());
+                    newBoard.setSymbolAt(i, j, current);
                     boardTreeNode.addSibling(i, j, newBoard);
                 }
             }
@@ -83,6 +77,6 @@ public class RobotAgent {
 //            }
 //        }
 
-        return new MinimaxResult(bestScore, bestRow, bestCol);
+        return new MinimaxResult(score, row, col);
     }
 }
