@@ -7,6 +7,10 @@ package info.botelho.ttt;
 public class BoardSpace {
     private GameSymbol symbol;
     
+    public BoardSpace(GameSymbol symbol) {
+        this.symbol = symbol;
+    }
+    
     public GameSymbol getSymbol() {
         return this.symbol;
     }

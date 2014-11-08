@@ -10,17 +10,15 @@ package info.botelho.ttt;
  */
 public class DrawRule extends Rule {
     
-    private final String message = "Draw!";
-
     public Result check(GameState gameState) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (gameState.getBoard().getSymbolAtPosition(i, j) == null) {
+                if (gameState.getBoard().getSymbolAtPosition(i, j) == GameSymbol.Blank) {
                     return null;
                 }
             }
         }
         
-        return new Result(message);
+        return new Result();
     }
 }

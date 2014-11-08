@@ -45,19 +45,31 @@ public class HumanConsoleClient extends GameClient {
     public void update(GameState state) {
         for(int i = 0; i < 2; i++) {
             for(int j = 0; j < 2; j++) {
-                System.out.print(state.getBoard().getSymbolAtPosition(i,j) + " | ");
+                System.out.print(getPrintSymbol(state.getBoard().getSymbolAtPosition(i,j)) + " | ");
             }
-            System.out.println(state.getBoard().getSymbolAtPosition(i,2));
+            System.out.println(getPrintSymbol(state.getBoard().getSymbolAtPosition(i,2)));
             System.out.println("----------");
         }
         
         for(int i = 0; i < 2; i++) {
-            System.out.print(state.getBoard().getSymbolAtPosition(2,i) + " | ");
+            System.out.print(getPrintSymbol(state.getBoard().getSymbolAtPosition(2,i)) + " | ");
         }
         
-        System.out.println(state.getBoard().getSymbolAtPosition(2, 2));
+        System.out.println(getPrintSymbol(state.getBoard().getSymbolAtPosition(2, 2)));
         System.out.println("");
         System.out.println("");
+    }
+    
+    public char getPrintSymbol(GameSymbol symbol) {
+        switch(symbol) {
+            case Blank:
+                return ' ';
+            case X:
+                return 'X';
+            case O:
+                return 'O';
+        }
+        return ' ';
     }
 
     public Player getPlayer() {

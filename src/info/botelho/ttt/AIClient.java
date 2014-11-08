@@ -17,8 +17,7 @@ public class AIClient extends GameClient {
     }
     
     public GameInput getInput(GameState gameState) {
-//        return RobotAgent.getInput(gameState.getCurrentPlayer().getSymbol(), gameState.getBoard());
-        return null;
+        return MinimaxAgent.getInput(gameState);
     }
 
     public void update(GameState state) {

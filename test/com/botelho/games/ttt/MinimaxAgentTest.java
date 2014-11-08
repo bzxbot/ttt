@@ -7,7 +7,7 @@ package com.botelho.games.ttt;
 import info.botelho.ttt.BoardTreeNode;
 import info.botelho.ttt.Board;
 import info.botelho.ttt.MinimaxResult;
-import info.botelho.ttt.RobotAgent;
+import info.botelho.ttt.MinimaxAgent;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,9 +19,9 @@ import static org.junit.Assert.*;
  *
  * @author Bernardo
  */
-public class RobotInputTest {
+public class MinimaxAgentTest {
     
-    public RobotInputTest() {
+    public MinimaxAgentTest() {
     }
     
     @BeforeClass
@@ -38,18 +38,6 @@ public class RobotInputTest {
     
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of getInput method, of class RobotInput.
-     */
-    @Test
-    public void testIsGameOver() throws Exception {
-        char b[][] = {{ 'X', 'O', 'X'},
-                      { ' ', 'O', ' '},
-                      { 'O', 'X', 'X'}};
-        Board board = new Board(b);
-//        assertFalse(RobotAgent.isGameOver(board, 'X'));
     }
 
     /**

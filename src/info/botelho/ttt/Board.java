@@ -13,9 +13,13 @@ public class Board {
         
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
-                this.boardSpaces[i][j] = null;
+                this.boardSpaces[i][j] = new BoardSpace(GameSymbol.Blank);
             }
         }
+    }
+
+    public Board(char[][] b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public BoardSpace[][] getBoardSpaces() {

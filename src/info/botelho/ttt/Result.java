@@ -9,13 +9,19 @@ package info.botelho.ttt;
  * @author Bernardo
  */
 public class Result {
-    private String resultMessage;
+    private Player winner;
+    private ResultType gameResult;
     
-    public Result(String resultMessage) {
-        this.resultMessage = resultMessage;
+    public Result(Player winner) {
+        this.winner = winner;
+        this.gameResult = ResultType.PlayerWins;
+    }
+   
+    public Result() {
+        this.gameResult = ResultType.Draw;
     }
     
-    public String getMessage() {
-        return resultMessage;
+    public Player getWinner() {
+        return winner;
     }
 }

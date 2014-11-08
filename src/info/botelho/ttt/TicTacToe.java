@@ -9,7 +9,7 @@ public class TicTacToe {
     private final ArrayList<Rule> rules;
 
     public TicTacToe() { 
-        rules = new ArrayList<Rule>();
+        rules = new ArrayList<>();
         rules.add(new GameOverRule());
         rules.add(new DrawRule());
     }
@@ -18,13 +18,15 @@ public class TicTacToe {
         currentClient = firstClient;
         firstClient.setNextClient(secondClient);
         secondClient.setNextClient(firstClient);
-        gameState = new GameState(currentClient.getPlayer());
+        Player firstPlayer = currentClient.getPlayer();
+        gameState = new GameState(firstPlayer);
         run();
     }
     
     private void run() {
         boolean running = true;
         Result result;
+        
         do {
             turn();
             result = isGameOver();
@@ -57,7 +59,7 @@ public class TicTacToe {
     }
     
     private boolean isInputValid(GameInput gameInput) {
-        return gameState.getBoard().getSymbolAtPosition(gameInput.getRow(), gameInput.getColumn()) == null;
+        return gameState.getBoard().getSymbolAtPosition(gameInput.getRow(), gameInput.getColumn()) == GameSymbol.Blank;
     }
     
     private Result isGameOver() {
@@ -71,6 +73,5 @@ public class TicTacToe {
     }
     
     private void gameOver(Result result) {
-        System.out.println(result.getMessage());
     }
 }
