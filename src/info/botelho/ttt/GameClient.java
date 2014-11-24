@@ -12,6 +12,7 @@ public abstract class GameClient {
     public abstract GameInput getInput(GameState gameState);
 
     public abstract void update(GameState gameState);
+    public abstract void gameOver(Result result);
 
     private GameClient next;
     

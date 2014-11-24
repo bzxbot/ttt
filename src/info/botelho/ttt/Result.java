@@ -10,15 +10,12 @@ package info.botelho.ttt;
  */
 public class Result {
     private Player winner;
-    private ResultType gameResult;
+    
+    public Result() {
+    }
     
     public Result(Player winner) {
         this.winner = winner;
-        this.gameResult = ResultType.PlayerWins;
-    }
-   
-    public Result() {
-        this.gameResult = ResultType.Draw;
     }
     
     public Player getWinner() {

@@ -15,6 +15,10 @@ public class HumanConsoleClient extends GameClient {
         scanner = new Scanner(System.in);
     }
     
+    public void gameOver(Result result) {
+        System.out.println("Game Over!");
+    }
+    
     public GameInput getInput(GameState gameState) {
         System.out.println("Enter row and column: ");
         GameInput gameInput = new GameInput();

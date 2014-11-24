@@ -1,17 +1,13 @@
 package info.botelho.ttt;
 
-import java.util.ArrayList;
-
 public class TicTacToe {
     
     private GameClient currentClient;
     private GameState gameState;
-    private final ArrayList<Rule> rules;
-
-    public TicTacToe() { 
-        rules = new ArrayList<>();
-        rules.add(new GameOverRule());
-        rules.add(new DrawRule());
+    private DefaultRuleSet defaultRuleSet;
+    
+    public TicTacToe() {
+        defaultRuleSet = new DefaultRuleSet();
     }
     
     public void start(GameClient firstClient, GameClient secondClient) {
@@ -29,7 +25,7 @@ public class TicTacToe {
         
         do {
             turn();
-            result = isGameOver();
+            result = defaultRuleSet.isGameOver(gameState);
             if (result != null) {
                 running = false;
             } else {
@@ -62,16 +58,8 @@ public class TicTacToe {
         return gameState.getBoard().getSymbolAtPosition(gameInput.getRow(), gameInput.getColumn()) == GameSymbol.Blank;
     }
     
-    private Result isGameOver() {
-        for(Rule rule : rules) {
-            Result result = rule.check(gameState);
-            if (result != null) {
-                return result;
-            }
-        }
-        return null;
-    }
-    
     private void gameOver(Result result) {
+        currentClient.gameOver(result);
+        currentClient.getNextClient().gameOver(result);
     }
 }

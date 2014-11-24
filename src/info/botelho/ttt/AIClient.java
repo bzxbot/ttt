@@ -10,14 +10,18 @@ package info.botelho.ttt;
  */
 public class AIClient extends GameClient {
 
-    Player player;
+    private Player player;
+    private NegamaxAgent negamaxAgent;
     
     public AIClient(Player player) {
         this.player = player;
     }
     
+    public void gameOver(Result result) {
+    }
+    
     public GameInput getInput(GameState gameState) {
-        return MinimaxAgent.getInput(gameState);
+        return negamaxAgent.getInput(gameState);
     }
 
     public void update(GameState state) {
