@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>NegamaxAgent.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Tic_Tac_Toe&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">info.botelho.ttt</a> &gt; <span class="el_source">NegamaxAgent.java</span></div><h1>NegamaxAgent.java</h1><pre class="source lang-java linenums">/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package info.botelho.ttt;
+
+/**
+ *
+ * @author Bernardo
+ */
+<span class="fc" id="L11">public class NegamaxAgent {</span>
+    
+<span class="fc" id="L13">    private final DefaultRuleSet defaultRuleSet = new DefaultRuleSet();</span>
+    
+    public GameInput getInput(GameState gameState) throws InvalidGameInputException {
+<span class="fc" id="L16">        Player currentPlayer = gameState.getCurrentPlayer();</span>
+<span class="fc" id="L17">        NegamaxNode root = new NegamaxNode(gameState.getBoard());</span>
+<span class="fc" id="L18">        generateTree(root, gameState.getCurrentPlayer());</span>
+<span class="fc" id="L19">        NegamaxResult result = negamax(root, currentPlayer, 1);</span>
+<span class="fc" id="L20">        GameInput gameInput = new GameInput();</span>
+<span class="fc" id="L21">        gameInput.setInput(result.getRow(), result.getColumn());</span>
+<span class="fc" id="L22">        return gameInput;</span>
+    }
+    
+    private void generateTree(NegamaxNode node, Player currentPlayer) {
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        for (int i = 0; i &lt; 3; i++) {</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">            for (int j = 0; j &lt; 3; j++) {</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">                if (node.getBoard().getSymbolAtPosition(i, j) == GameSymbol.Blank) {</span>
+<span class="fc" id="L29">                    Board newBoard = new Board(node.getBoard().getGrid());</span>
+<span class="fc" id="L30">                    newBoard.setSymbolAt(i, j, currentPlayer);</span>
+<span class="fc" id="L31">                    NegamaxNode newNode = new NegamaxNode(newBoard, i, j);</span>
+<span class="fc" id="L32">                    node.addSibling(newNode);</span>
+<span class="fc" id="L33">                    generateTree(newNode, currentPlayer.getNextPlayer());</span>
+                }
+            }
+        }
+<span class="fc" id="L37">    }</span>
+    
+    private NegamaxResult negamax(NegamaxNode node, Player max, int color) {
+<span class="fc" id="L40">        GameState gameState = new GameState(max, node.getBoard());</span>
+<span class="fc" id="L41">        Result result = defaultRuleSet.isGameOver(gameState);</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (result != null) {</span>
+<span class="fc" id="L43">            return new NegamaxResult(gameScore(gameState, result, max) * color);</span>
+        }
+<span class="fc" id="L45">        NegamaxResult finalResult = new NegamaxResult();</span>
+<span class="fc" id="L46">        finalResult.setScore(Integer.MIN_VALUE);</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        for (NegamaxNode sibling : node.getSiblings()) {</span>
+<span class="fc" id="L48">            NegamaxResult negamaxResult = negamax(sibling, max, -color);</span>
+<span class="fc" id="L49">            int value = -negamaxResult.getScore();</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">            if (value &gt; finalResult.getScore()) {</span>
+<span class="fc" id="L51">                finalResult.setScore(value);</span>
+<span class="fc" id="L52">                finalResult.setRow(sibling.getRow());</span>
+<span class="fc" id="L53">                finalResult.setColumn(sibling.getColumn());</span>
+            }
+<span class="fc" id="L55">        }</span>
+<span class="fc" id="L56">        return finalResult;</span>
+    }
+    
+    private int gameScore(GameState gameState, Result result, Player max) {
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (result.getWinner() == null) </span>
+<span class="fc" id="L61">            return 0;</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if (result.getWinner().getSymbol() == max.getSymbol())</span>
+<span class="fc" id="L63">            return 1;</span>
+<span class="fc" id="L64">        return -1;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

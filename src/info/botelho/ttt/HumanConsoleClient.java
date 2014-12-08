@@ -15,11 +15,18 @@ public class HumanConsoleClient extends GameClient {
         scanner = new Scanner(System.in);
     }
     
+    @Override
     public void gameOver(Result result) {
         System.out.println("Game Over!");
+        if (result.getWinner().getSymbol() == null) {
+            System.out.println("Draw!");
+        } else { 
+            System.out.println(result.getWinner().getSymbol() + " wins!");
+        }
     }
     
-    public GameInput getInput(GameState gameState) {
+    @Override
+    public GameInput getInput() {
         System.out.println("Enter row and column: ");
         GameInput gameInput = new GameInput();
         boolean validInput = false;
@@ -46,6 +53,7 @@ public class HumanConsoleClient extends GameClient {
         return -1;
     }
 
+    @Override
     public void update(GameState state) {
         for(int i = 0; i < 2; i++) {
             for(int j = 0; j < 2; j++) {
@@ -76,6 +84,7 @@ public class HumanConsoleClient extends GameClient {
         return ' ';
     }
 
+    @Override
     public Player getPlayer() {
         return player;
     }

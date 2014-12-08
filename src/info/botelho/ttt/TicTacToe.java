@@ -15,6 +15,9 @@ public class TicTacToe {
         firstClient.setNextClient(secondClient);
         secondClient.setNextClient(firstClient);
         Player firstPlayer = currentClient.getPlayer();
+        Player secondPlayer = secondClient.getPlayer();
+        firstPlayer.setNextPlayer(secondPlayer);
+        secondPlayer.setNextPlayer(firstPlayer);
         gameState = new GameState(firstPlayer);
         run();
     }
@@ -42,7 +45,7 @@ public class TicTacToe {
         currentClient.update(gameState);
         
         do {
-            gameInput = currentClient.getInput(gameState);
+            gameInput = currentClient.getInput();
         } while (!isInputValid(gameInput));
         
         gameState.getBoard().setSymbolAt(gameInput.getRow(), gameInput.getColumn(), currentClient.getPlayer());

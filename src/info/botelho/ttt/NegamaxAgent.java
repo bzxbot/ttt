@@ -4,9 +4,6 @@
  */
 package info.botelho.ttt;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Bernardo
@@ -15,19 +12,13 @@ public class NegamaxAgent {
     
     private final DefaultRuleSet defaultRuleSet = new DefaultRuleSet();
     
-    public GameInput getInput(GameState gameState) {
-        BoardTreeNode boardTreeNode = new BoardTreeNode(-1, -1, null, gameState.getBoard());
+    public GameInput getInput(GameState gameState) throws InvalidGameInputException {
         Player currentPlayer = gameState.getCurrentPlayer();
-        Player nextPlayer = gameState.getCurrentPlayer().getNextPlayer();
         NegamaxNode root = new NegamaxNode(gameState.getBoard());
         generateTree(root, gameState.getCurrentPlayer());
         NegamaxResult result = negamax(root, currentPlayer, 1);
         GameInput gameInput = new GameInput();
-        try {
-            gameInput.setInput(result.getRow(), result.getColumn());
-        } catch (InvalidGameInputException ex) {
-            Logger.getLogger(NegamaxAgent.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        gameInput.setInput(result.getRow(), result.getColumn());
         return gameInput;
     }
     
@@ -46,14 +37,15 @@ public class NegamaxAgent {
     }
     
     private NegamaxResult negamax(NegamaxNode node, Player max, int color) {
-        Result result = defaultRuleSet.isGameOver(new GameState(max, node.getBoard()));
+        GameState gameState = new GameState(max, node.getBoard());
+        Result result = defaultRuleSet.isGameOver(gameState);
         if (result != null) {
-            return new NegamaxResult(gameScore(result, max) * color);
+            return new NegamaxResult(gameScore(gameState, result, max) * color);
         }
         NegamaxResult finalResult = new NegamaxResult();
         finalResult.setScore(Integer.MIN_VALUE);
-        for (NegamaxNode sibling : node.siblings) {
-            NegamaxResult negamaxResult = negamax(sibling, max.getNextPlayer(), -color);
+        for (NegamaxNode sibling : node.getSiblings()) {
+            NegamaxResult negamaxResult = negamax(sibling, max, -color);
             int value = -negamaxResult.getScore();
             if (value > finalResult.getScore()) {
                 finalResult.setScore(value);
@@ -64,11 +56,11 @@ public class NegamaxAgent {
         return finalResult;
     }
     
-    private int gameScore(Result result, Player max) {
-        if (result.getWinner() == max)
+    private int gameScore(GameState gameState, Result result, Player max) {
+        if (result.getWinner() == null) 
+            return 0;
+        if (result.getWinner().getSymbol() == max.getSymbol())
             return 1;
-        if (result.getWinner() != null)
-            return -1;
-        return 0;
+        return -1;
     }
 }

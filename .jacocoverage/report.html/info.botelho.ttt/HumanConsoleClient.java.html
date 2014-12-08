@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>HumanConsoleClient.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Tic_Tac_Toe&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">info.botelho.ttt</a> &gt; <span class="el_source">HumanConsoleClient.java</span></div><h1>HumanConsoleClient.java</h1><pre class="source lang-java linenums">package info.botelho.ttt;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Bernardo
+ */
+public class HumanConsoleClient extends GameClient {
+    private Player player;
+    private Scanner scanner;
+    
+<span class="nc" id="L13">    public HumanConsoleClient(Player player) {</span>
+<span class="nc" id="L14">        this.player = player;</span>
+<span class="nc" id="L15">        scanner = new Scanner(System.in);</span>
+<span class="nc" id="L16">    }</span>
+    
+    @Override
+    public void gameOver(Result result) {
+<span class="nc" id="L20">        System.out.println(&quot;Game Over!&quot;);</span>
+<span class="nc" id="L21">        System.out.println(result.getWinner().getSymbol() + &quot; wins!&quot;);</span>
+<span class="nc" id="L22">    }</span>
+    
+    @Override
+    public GameInput getInput() {
+<span class="nc" id="L26">        System.out.println(&quot;Enter row and column: &quot;);</span>
+<span class="nc" id="L27">        GameInput gameInput = new GameInput();</span>
+<span class="nc" id="L28">        boolean validInput = false;</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        while (!validInput) {</span>
+            try {
+<span class="nc" id="L31">                gameInput.setInput(readNextInt() - 1, readNextInt() - 1);</span>
+<span class="nc" id="L32">                validInput = true;</span>
+<span class="nc" id="L33">            } catch (InvalidGameInputException invalidGameInputException) {</span>
+<span class="nc" id="L34">                System.out.println(invalidGameInputException.getMessage());</span>
+<span class="nc" id="L35">            }</span>
+        }
+<span class="nc" id="L37">        return gameInput;</span>
+    }
+    
+    private int readNextInt() {
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        while (scanner.hasNext()) {</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">            if (scanner.hasNextInt()) {</span>
+<span class="nc" id="L43">		return scanner.nextInt();</span>
+            } else {
+<span class="nc" id="L45">		scanner.next();</span>
+            }
+	}
+        
+<span class="nc" id="L49">        return -1;</span>
+    }
+
+    @Override
+    public void update(GameState state) {
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        for(int i = 0; i &lt; 2; i++) {</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">            for(int j = 0; j &lt; 2; j++) {</span>
+<span class="nc" id="L56">                System.out.print(getPrintSymbol(state.getBoard().getSymbolAtPosition(i,j)) + &quot; | &quot;);</span>
+            }
+<span class="nc" id="L58">            System.out.println(getPrintSymbol(state.getBoard().getSymbolAtPosition(i,2)));</span>
+<span class="nc" id="L59">            System.out.println(&quot;----------&quot;);</span>
+        }
+        
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        for(int i = 0; i &lt; 2; i++) {</span>
+<span class="nc" id="L63">            System.out.print(getPrintSymbol(state.getBoard().getSymbolAtPosition(2,i)) + &quot; | &quot;);</span>
+        }
+        
+<span class="nc" id="L66">        System.out.println(getPrintSymbol(state.getBoard().getSymbolAtPosition(2, 2)));</span>
+<span class="nc" id="L67">        System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L68">        System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L69">    }</span>
+    
+    public char getPrintSymbol(GameSymbol symbol) {
+<span class="nc bnc" id="L72" title="All 4 branches missed.">        switch(symbol) {</span>
+            case Blank:
+<span class="nc" id="L74">                return ' ';</span>
+            case X:
+<span class="nc" id="L76">                return 'X';</span>
+            case O:
+<span class="nc" id="L78">                return 'O';</span>
+        }
+<span class="nc" id="L80">        return ' ';</span>
+    }
+
+    @Override
+    public Player getPlayer() {
+<span class="nc" id="L85">        return player;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

@@ -22,7 +22,6 @@ public class DefaultRuleSet {
         rules.add(new DrawRule());
     }
     
-    
     public Result isGameOver(GameState gameState) {
         for(Rule rule : rules) {
             Result result = rule.check(gameState);

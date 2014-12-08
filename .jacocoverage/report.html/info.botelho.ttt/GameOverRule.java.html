@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GameOverRule.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Tic_Tac_Toe&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">info.botelho.ttt</a> &gt; <span class="el_source">GameOverRule.java</span></div><h1>GameOverRule.java</h1><pre class="source lang-java linenums">/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package info.botelho.ttt;
+
+/**
+ *
+ * @author Bernardo
+ */
+<span class="fc" id="L11">public class GameOverRule extends Rule {</span>
+
+    @Override
+    public Result check(GameState gameState) {
+<span class="fc" id="L15">        Board board = gameState.getBoard();</span>
+        
+<span class="fc" id="L17">        Player firstPlayer = gameState.getCurrentPlayer();</span>
+<span class="fc" id="L18">        Player secondPlayer = firstPlayer.getNextPlayer();</span>
+        
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        if (isGameOver(board, firstPlayer.getSymbol())) {</span>
+<span class="fc" id="L21">            return new Result(firstPlayer);</span>
+        }
+        
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (isGameOver(board, secondPlayer.getSymbol())) {</span>
+<span class="fc" id="L25">            return new Result(secondPlayer);</span>
+        }
+        
+<span class="fc" id="L28">        return null;</span>
+    }
+    
+    private boolean isGameOver(Board board, GameSymbol gameSymbol) {
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        for (int i = 0; i &lt; 3; i++) {</span>
+<span class="fc bfc" id="L33" title="All 6 branches covered.">            if (board.getSymbolAtPosition(i, 0) == gameSymbol &amp;&amp;</span>
+                board.getSymbolAtPosition(i, 1) == gameSymbol &amp;&amp;
+                board.getSymbolAtPosition(i, 2) == gameSymbol)
+<span class="fc" id="L36">                    return true;</span>
+        }
+        
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        for (int i = 0; i &lt; 3; i++) {</span>
+<span class="fc bfc" id="L40" title="All 6 branches covered.">            if (board.getSymbolAtPosition(0, i) == gameSymbol &amp;&amp;</span>
+                board.getSymbolAtPosition(1, i) == gameSymbol &amp;&amp;
+                board.getSymbolAtPosition(2, i) == gameSymbol)
+<span class="fc" id="L43">                    return true;</span>
+        }
+        
+<span class="fc bfc" id="L46" title="All 6 branches covered.">        if (board.getSymbolAtPosition(0, 0) == gameSymbol &amp;&amp;</span>
+            board.getSymbolAtPosition(1, 1) == gameSymbol &amp;&amp;
+            board.getSymbolAtPosition(2, 2) == gameSymbol)
+<span class="fc" id="L49">                    return true;</span>
+    
+<span class="fc bfc" id="L51" title="All 6 branches covered.">        if (board.getSymbolAtPosition(2, 0) == gameSymbol &amp;&amp;</span>
+            board.getSymbolAtPosition(1, 1) == gameSymbol &amp;&amp;
+            board.getSymbolAtPosition(0, 2) == gameSymbol)
+<span class="fc" id="L54">                    return true;</span>
+        
+<span class="fc" id="L56">        return false;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

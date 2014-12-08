@@ -4,10 +4,10 @@ package info.botelho.ttt;
  *
  * @author Bernardo
  */
-public class Cell {
+public class BoardCell {
     private GameSymbol symbol;
     
-    public Cell(GameSymbol symbol) {
+    public BoardCell(GameSymbol symbol) {
         this.symbol = symbol;
     }
     

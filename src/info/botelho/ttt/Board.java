@@ -2,49 +2,49 @@ package info.botelho.ttt;
 
 public class Board {    
     
-    private Cell[][] grid;
+    private BoardCell[][] grid;
     
     public Board(char[][] grid) {
-        this.grid = new Cell[3][3];
+        this.grid = new BoardCell[3][3];
         
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
                 switch(grid[i][j]) {
                     case 'X':
-                        this.grid[i][j] = new Cell(GameSymbol.X);
+                        this.grid[i][j] = new BoardCell(GameSymbol.X);
                         break;
                     case 'O':
-                        this.grid[i][j] = new Cell(GameSymbol.O);
+                        this.grid[i][j] = new BoardCell(GameSymbol.O);
                         break;
                     case ' ':
-                        this.grid[i][j] = new Cell(GameSymbol.Blank);
+                        this.grid[i][j] = new BoardCell(GameSymbol.Blank);
                         break;
                 }
             }
         }
     }
     
-    public Board(Cell[][] grid) {
-        this.grid = new Cell[3][3];
+    public Board(BoardCell[][] grid) {
+        this.grid = new BoardCell[3][3];
         
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
-                this.grid[i][j] = new Cell(grid[i][j].getSymbol());
+                this.grid[i][j] = new BoardCell(grid[i][j].getSymbol());
             }
         }
     }
     
     public Board() {
-        this.grid = new Cell[3][3];
+        this.grid = new BoardCell[3][3];
         
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
-                this.grid[i][j] = new Cell(GameSymbol.Blank);
+                this.grid[i][j] = new BoardCell(GameSymbol.Blank);
             }
         }
     }
     
-    public Cell[][] getGrid() {
+    public BoardCell[][] getGrid() {
         return this.grid;
     }
     
@@ -56,9 +56,24 @@ public class Board {
         return grid[row][col].getSymbol();
     }
     
+    @Override
     public String toString() {
-        String val = "";
-        return val;
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = 0; i < 2; i++) {
+            for(int j = 0; j < 2; j++) {
+                stringBuilder.append(getPrintSymbol(this.getSymbolAtPosition(i, j))).append(" | ");
+            }
+            stringBuilder.append(getPrintSymbol(this.getSymbolAtPosition(i, 2))).append("\n");
+            stringBuilder.append("----------").append("\n");
+        }
+        
+        for(int i = 0; i < 2; i++) {
+            stringBuilder.append(getPrintSymbol(this.getSymbolAtPosition(2,i))).append(" | ");
+        }
+        
+        stringBuilder.append(getPrintSymbol(this.getSymbolAtPosition(2, 2))).append("\n");
+        
+        return stringBuilder.toString();
     }
     
     public void print() {

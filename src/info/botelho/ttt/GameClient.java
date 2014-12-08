@@ -9,8 +9,7 @@ package info.botelho.ttt;
  * @author Bernardo
  */
 public abstract class GameClient {
-    public abstract GameInput getInput(GameState gameState);
-
+    public abstract GameInput getInput();
     public abstract void update(GameState gameState);
     public abstract void gameOver(Result result);
 

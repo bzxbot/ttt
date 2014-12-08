@@ -10,37 +10,50 @@ package info.botelho.ttt;
  */
 public class GameOverRule extends Rule {
 
+    @Override
     public Result check(GameState gameState) {
         Board board = gameState.getBoard();
         
-        Player currentPlayer = gameState.getCurrentPlayer();
-        GameSymbol currentPlayerSymbol = currentPlayer.getSymbol();
+        Player firstPlayer = gameState.getCurrentPlayer();
+        Player secondPlayer = firstPlayer.getNextPlayer();
         
-        for (int i = 0; i < 3; i++) {
-            if (board.getSymbolAtPosition(i, 0) == currentPlayerSymbol &&
-                board.getSymbolAtPosition(i, 1) == currentPlayerSymbol &&
-                board.getSymbolAtPosition(i, 2) == currentPlayerSymbol)
-                    return new Result(currentPlayer);
+        if (isGameOver(board, firstPlayer.getSymbol())) {
+            return new Result(firstPlayer);
         }
         
-        for (int i = 0; i < 3; i++) {
-            if (board.getSymbolAtPosition(0, i) == currentPlayerSymbol &&
-                board.getSymbolAtPosition(1, i) == currentPlayerSymbol &&
-                board.getSymbolAtPosition(2, i) == currentPlayerSymbol)
-                    return new Result(currentPlayer);
+        if (isGameOver(board, secondPlayer.getSymbol())) {
+            return new Result(secondPlayer);
         }
-        
-        if (board.getSymbolAtPosition(0, 0) == currentPlayerSymbol &&
-            board.getSymbolAtPosition(1, 1) == currentPlayerSymbol &&
-            board.getSymbolAtPosition(2, 2) == currentPlayerSymbol)
-                    return new Result(currentPlayer);
-    
-        if (board.getSymbolAtPosition(2, 0) == currentPlayerSymbol &&
-            board.getSymbolAtPosition(1, 1) == currentPlayerSymbol &&
-            board.getSymbolAtPosition(0, 2) == currentPlayerSymbol)
-                    return new Result(currentPlayer);
         
         return null;
+    }
+    
+    private boolean isGameOver(Board board, GameSymbol gameSymbol) {
+        for (int i = 0; i < 3; i++) {
+            if (board.getSymbolAtPosition(i, 0) == gameSymbol &&
+                board.getSymbolAtPosition(i, 1) == gameSymbol &&
+                board.getSymbolAtPosition(i, 2) == gameSymbol)
+                    return true;
+        }
+        
+        for (int i = 0; i < 3; i++) {
+            if (board.getSymbolAtPosition(0, i) == gameSymbol &&
+                board.getSymbolAtPosition(1, i) == gameSymbol &&
+                board.getSymbolAtPosition(2, i) == gameSymbol)
+                    return true;
+        }
+        
+        if (board.getSymbolAtPosition(0, 0) == gameSymbol &&
+            board.getSymbolAtPosition(1, 1) == gameSymbol &&
+            board.getSymbolAtPosition(2, 2) == gameSymbol)
+                    return true;
+    
+        if (board.getSymbolAtPosition(2, 0) == gameSymbol &&
+            board.getSymbolAtPosition(1, 1) == gameSymbol &&
+            board.getSymbolAtPosition(0, 2) == gameSymbol)
+                    return true;
+        
+        return false;
     }
     
 }

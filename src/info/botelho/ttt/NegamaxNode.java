@@ -13,9 +13,9 @@ import java.util.ArrayList;
  * @author Bernardo
  */
 public class NegamaxNode {
-    public ArrayList<NegamaxNode> siblings;
+    private ArrayList<NegamaxNode> siblings = new ArrayList<>();
     
-    private Board board;
+    private final Board board;
     private int row;
     private int column;
     
@@ -39,6 +39,10 @@ public class NegamaxNode {
 
     public int getRow() {
         return row;
+    }
+
+    public ArrayList<NegamaxNode> getSiblings() {
+        return siblings;
     }
 
     public int getColumn() {

@@ -3,12 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/Bernardo/Workbench/NetBeansProjects/Tic%20Tac%20Toe/src/info/botelho/ttt/BoardTree.java</file>
-            <file>file:/Users/Bernardo/Workbench/NetBeansProjects/Tic%20Tac%20Toe/src/info/botelho/ttt/BootstrapClient.java</file>
-            <file>file:/Users/Bernardo/Workbench/NetBeansProjects/Tic%20Tac%20Toe/src/info/botelho/ttt/MinimaxAgent.java</file>
-            <file>file:/Users/Bernardo/Workbench/NetBeansProjects/Tic%20Tac%20Toe/test/com/botelho/games/ttt/TicTacToeTest.java</file>
-            <file>file:/Users/Bernardo/Workbench/NetBeansProjects/Tic%20Tac%20Toe/src/info/botelho/ttt/BoardTreeNode.java</file>
-            <file>file:/Users/Bernardo/Workbench/NetBeansProjects/Tic%20Tac%20Toe/test/com/botelho/games/ttt/MinimaxAgentTest.java</file>
+            <file>file:/Users/Bernardo/Workbench/NetBeansProjects/Tic%20Tac%20Toe/src/info/botelho/ttt/Board.java</file>
+            <file>file:/Users/Bernardo/Workbench/NetBeansProjects/Tic%20Tac%20Toe/src/info/botelho/ttt/BoardCell.java</file>
         </group>
     </open-files>
 </project-private>
